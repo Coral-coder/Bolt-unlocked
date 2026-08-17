@@ -1,14 +1,60 @@
 # Getting the app onto the unit WITHOUT opening it
 
-Goal: install/run our NGI app on the 2023 Bolt EUV head unit (LG LC10SB, QNX)
-using only **already-exposed interfaces** — the front USB port, the OBD-II port,
-the unit's Wi-Fi, and the on-screen engineering menu. No dash disassembly, no
-soldering, no chip-off.
+Goal: get our web app onto the 2023 Bolt EUV head unit using only
+**already-exposed interfaces**. No dash disassembly, no soldering, no chip-off.
 
-## Honest status
+## What the unit actually is (updated)
 
-There is **no published, reliable no-teardown method** to install a custom app
-on this head unit as of now. What we know:
+The owner reached **Settings → About → tap Build number → Developer options →
+USB debugging**, and `adb` connects. That's the **Android** flow — so this unit
+is GM **"Google built-in" = Android Automotive OS (AAOS)**, not the QNX box the
+earlier docs assumed. (GM's Google-built-in infotainment shipped on the 2023
+refreshes; the QNX/NGI notes lower down are kept only as background.)
+
+## ⛔ adb connects, but native install is BLOCKED (and there's no public bypass)
+
+adb turning on does **not** mean you can install apps. On GM AAOS the owner finds
+adb "protected" — and that matches the whole community's experience:
+
+- **Policy-level sideload block.** GM sets a device-owner policy that disallows
+  installs from unknown sources, so `adb install` / `pm install` are **denied**
+  even with USB debugging on. There is no "Install unknown apps" toggle to flip.
+- **Locked bootloader + verified boot.** No custom flashing, no root, no
+  remounting `/system`.
+- **Community status:** the XDA "GM Google Built-In — Tinkering" thread (25+
+  pages) reports **zero success** sideloading apps this way, and GM's developer
+  portal explicitly answered **"No"** to third-party sideloading.
+
+**Conclusion: there is currently no public method to natively install an app on
+this head unit.** Chasing an adb/`pm install` bypass is a dead end today.
+
+➡️ **The working approach is projection, not installation:** run our web app on
+your **phone** and display it on the car screen over **Android Auto**. It's
+reversible, needs no head-unit modification, and works on the stock locked unit.
+See **[PROJECTION-ANDROID-AUTO.md](PROJECTION-ANDROID-AUTO.md)** — this is the
+recommended path now.
+
+### One cheap thing to confirm first (tell me the exact symptom)
+
+If adb shell *does* give a prompt, capture what actually fails so we're certain:
+
+```bash
+adb shell id                         # do we even get a shell user?
+adb install ./any-small.apk          # note the exact error, e.g. INSTALL_FAILED_USER_RESTRICTED
+adb shell pm list packages | grep -iE 'browser|chrome|webview|vending'
+adb shell am start -a android.intent.action.VIEW \
+  -d "https://coral-coder.github.io/Bolt-unlocked/app/"   # any handler? (usually none on AAOS)
+```
+
+If `am start` unexpectedly opens our page in some built-in webview, great — but
+don't count on it. Projection is the reliable route.
+
+---
+
+## Honest status (pre-adb background)
+
+Before adb was confirmed, there was **no published no-teardown method**. What we
+knew:
 
 - **Sanctioned path is dead.** GM's NGI **Dev Client** (the only official way to
   load a test app into a real vehicle) required VIN approval **and** downloading

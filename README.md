@@ -111,7 +111,8 @@ so pushing to the served branch **auto-updates** what the unit loads. Live at
 
 ## Documents
 
-- [docs/NO-TEARDOWN-ACCESS.md](docs/NO-TEARDOWN-ACCESS.md) — **getting the app on the unit without opening it** (test plan)
+- [docs/PROJECTION-ANDROID-AUTO.md](docs/PROJECTION-ANDROID-AUTO.md) — **the working way to get the app on-screen** (Android Auto projection)
+- [docs/NO-TEARDOWN-ACCESS.md](docs/NO-TEARDOWN-ACCESS.md) — why native install is blocked on GM AAOS + what was tried
 - [docs/DEBUG-MENU.md](docs/DEBUG-MENU.md) — hidden engineering menu: how to open it
 - [docs/CUSTOM-APPS.md](docs/CUSTOM-APPS.md) — the app runtime, format & how to build one
 - [docs/DEPLOY.md](docs/DEPLOY.md) — deploy the example app + auto-update wiring
