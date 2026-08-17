@@ -99,9 +99,20 @@ Easiest → most invasive:
 The win condition: place an HTML5 NGI app (format from A) into the app location
 we find in B, and register it the way the dead AppShop used to.
 
+## Example app — Weather Radar
+
+Our first NGI app lives in [`/app`](app): a full-screen **weather radar +
+current conditions** display that uses your GPS location. Radar tiles from
+RainViewer, conditions from the US NWS, dark map from CARTO — all free, no API
+keys. It's a `RemoteHigh` NGI app served from **GitHub Pages**, so pushing to
+this repo **auto-updates** what the unit loads. See
+[docs/DEPLOY.md](docs/DEPLOY.md).
+
 ## Documents
 
-- [docs/CUSTOM-APPS.md](docs/CUSTOM-APPS.md) — **the app runtime, format & how to build one**
+- [docs/DEBUG-MENU.md](docs/DEBUG-MENU.md) — **hidden engineering menu: how to open it**
+- [docs/CUSTOM-APPS.md](docs/CUSTOM-APPS.md) — the app runtime, format & how to build one
+- [docs/DEPLOY.md](docs/DEPLOY.md) — deploy the example app + auto-update wiring
 - [docs/FIRMWARE.md](docs/FIRMWARE.md) — obtaining & analyzing firmware
 - [docs/HARDWARE.md](docs/HARDWARE.md) — module IDs, teardown, SoC confirmation
 - [docs/NEXT-STEPS.md](docs/NEXT-STEPS.md) — prioritized research plan
