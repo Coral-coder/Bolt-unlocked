@@ -30,11 +30,13 @@ push. Done.
 
 ## One-time GitHub setup
 
-1. In the repo: **Settings → Pages → Build and deployment → Source = GitHub
-   Actions**.
-2. Push. The workflow deploys and prints the site URL (also under **Actions →
-   Deploy … → deploy** job → `page_url`). It looks like:
-   `https://<owner>.github.io/<repo>/`
+The workflow enables Pages itself (`configure-pages` with `enablement: true`), so
+normally **no manual setting is needed** — just let the Action run.
+
+1. If your org disables API-based Pages enablement, flip it by hand once:
+   **Settings → Pages → Build and deployment → Source = GitHub Actions**.
+2. After a successful run, the site URL prints under **Actions → Deploy … →
+   deploy** job → `page_url`, and looks like `https://<owner>.github.io/<repo>/`.
 3. Open that URL in a browser to confirm the app loads. (Geolocation needs
    HTTPS — Pages is HTTPS, so it works. Locally, use `http://localhost`.)
 
