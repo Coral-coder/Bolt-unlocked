@@ -3,7 +3,11 @@
 ## 1. The official channel (signed, encrypted)
 
 GM ships infotainment firmware through the dealer programming system, not as a
-public download.
+public download. There is **no legitimate public mirror of the full signed
+`.bin` firmware** — forum "USB update" how-tos (e.g. the 2018 Electrek Bolt AA
+guide) trigger GM's own *Settings → Software Information → Software Update* flow,
+which pulls a GM-hosted package to the car; they do not hand you extractable
+firmware files. Treat any random site hosting "GM firmware .bin" as suspect.
 
 - **Portal:** `acdelcotds.com` → *Vehicle Programming Software*.
 - **Account:** ~$40 per VIN, valued for roughly two years of access.

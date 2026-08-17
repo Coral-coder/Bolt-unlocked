@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Bolt Weather Radar</title>
+
+  <!-- Leaflet (map + radar tile overlay). CDN for now; vendor into /app/vendor
+       for a fully offline-capable bundle before shipping to the unit. -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top bar -->
+    <header id="topbar">
+      <div class="loc">
+        <span id="loc-name">Locating…</span>
+        <span id="loc-sub"></span>
+      </div>
+      <div class="meta">
+        <span id="updated">—</span>
+        <span id="version" class="ver">v0.0.0</span>
+      </div>
+    </header>
+
+    <!-- Map / radar fills the screen -->
+    <div id="map"></div>
+
+    <!-- Current conditions card -->
+    <section id="conditions" class="card">
+      <div class="temp-row">
+        <span id="temp">--°</span>
+        <span id="cond-text">—</span>
+      </div>
+      <div class="detail-row">
+        <div><span class="lbl">Feels</span><span id="feels">--°</span></div>
+        <div><span class="lbl">Wind</span><span id="wind">-- mph</span></div>
+        <div><span class="lbl">Humidity</span><span id="humidity">--%</span></div>
+        <div><span class="lbl">Station</span><span id="station">—</span></div>
+      </div>
+    </section>
+
+    <!-- Radar animation controls -->
+    <footer id="controls" class="card">
+      <button id="play" aria-label="Play/Pause">⏸</button>
+      <input id="frame" type="range" min="0" max="0" value="0" step="1" />
+      <span id="frame-time" class="frame-time">—</span>
+    </footer>
+
+    <!-- Status / error toast -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "Bolt Weather Radar",
+  "id": "70000001",
+  "template": "Blank",
+  "version": "1.0.0",
+  "src": "src",
+  "dist": "dist",
+  "main": "index.html",
+  "icon": "Icon.png",
+  "developer": "Bolt-unlocked",
+  "category": "Weather",
+  "type": "RemoteHigh",
+  "description": "Live weather radar and current conditions for your location. Served remotely from GitHub Pages so it auto-updates on every push."
+}

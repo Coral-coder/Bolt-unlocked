@@ -3,8 +3,16 @@
 Ordered easiest/cheapest → most invasive. Each step should be logged back into
 this repo with what worked and what didn't.
 
-## Phase 0 — no hardware risk
+## Phase 0 — no hardware risk (start here, costs nothing)
 
+- [ ] **Build an NGI app in the simulator.** Get the `ngi-sdk` `.tgz`, scaffold
+      an app, run it locally. Produces the exact bundle we later place on the
+      unit. See [CUSTOM-APPS.md](CUSTOM-APPS.md).
+- [ ] **Mirror prior art now** into `prior-art/` before GM's portal fully dies:
+      `AccordionGuy/hello-gm`, `SalmaLargo/DriveEasy-NGI-GM-Application`,
+      `kkawtar/NGI-General-Motors-application`, `callmehiphop/gm-button-events`,
+      and the `ngi-sdk` package + docs (`developer.gm.com/ngi/downloads`).
+- [ ] Nail the full `gmapp.json` schema and `type` enum from the SDK docs.
 - [ ] Pull FCC filing `BEJLC10SB` internal photos; identify SoC / RAM / flash.
       (Blocked by egress here — do from an open network.)
 - [ ] Read `kallisti5/chevybolt` in full; mirror anything useful into `prior-art/`.
@@ -36,10 +44,15 @@ this repo with what worked and what didn't.
 - [ ] Inventory: init scripts, app manager, keystore, update client, cert pins.
 - [ ] Locate the keys the update client uses vs. the `.smd` public keys.
 
-## Phase 4 — get our code running
+## Phase 4 — get our app running
 
-- [ ] Identify how QNX launches the HMI apps (service manifests / launch config).
-- [ ] Prove a minimal custom binary/app can be added and auto-started.
+- [ ] Find where installed NGI apps live on the QNX filesystem and what catalog
+      the launcher reads (see open questions in [CUSTOM-APPS.md](CUSTOM-APPS.md)).
+- [ ] Manually place the Phase-0 app bundle there + add its catalog entry —
+      replicating what the (now dead) AppShop did over the air.
+- [ ] Determine what enforces `gmapp.json` `type`/signing at launch; find the
+      least-privileged app type that runs without server contact.
+- [ ] Prove the app launches and can call NGI JS APIs.
 - [ ] Determine whether changes survive an official SPS2 reflash, and how to
       re-apply after updates.
 
