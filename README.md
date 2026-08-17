@@ -111,7 +111,8 @@ so pushing to the served branch **auto-updates** what the unit loads. Live at
 
 ## Documents
 
-- [docs/DEBUG-MENU.md](docs/DEBUG-MENU.md) — **hidden engineering menu: how to open it**
+- [docs/NO-TEARDOWN-ACCESS.md](docs/NO-TEARDOWN-ACCESS.md) — **getting the app on the unit without opening it** (test plan)
+- [docs/DEBUG-MENU.md](docs/DEBUG-MENU.md) — hidden engineering menu: how to open it
 - [docs/CUSTOM-APPS.md](docs/CUSTOM-APPS.md) — the app runtime, format & how to build one
 - [docs/DEPLOY.md](docs/DEPLOY.md) — deploy the example app + auto-update wiring
 - [docs/FIRMWARE.md](docs/FIRMWARE.md) — obtaining & analyzing firmware
