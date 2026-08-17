@@ -3,30 +3,37 @@
 Goal: get our web app onto the 2023 Bolt EUV head unit using only
 **already-exposed interfaces**. No dash disassembly, no soldering, no chip-off.
 
-## What the unit actually is (updated)
+## What we actually KNOW (no platform label assumed)
 
-The owner reached **Settings → About → tap Build number → Developer options →
-USB debugging**, and `adb` connects. That's the **Android** flow — so this unit
-is GM **"Google built-in" = Android Automotive OS (AAOS)**, not the QNX box the
-earlier docs assumed. (GM's Google-built-in infotainment shipped on the 2023
-refreshes; the QNX/NGI notes lower down are kept only as background.)
+Don't assume the OS. Work from what the owner observes on THIS unit:
 
-## ⛔ adb connects, but native install is BLOCKED (and there's no public bypass)
+- **Settings → About → tap Build number → Developer options → USB debugging**
+  exists, and `adb` **connects**.
+- adb is **"protected"** — it connects but the useful capability (shell/install)
+  is restricted. Exact failure still to be captured (see snippet below).
+- Factory features: **SiriusXM, Apple CarPlay, Android Auto**, and a GM **"apps"**
+  section — **no Google apps / no Play Store**.
 
-adb turning on does **not** mean you can install apps. On GM AAOS the owner finds
-adb "protected" — and that matches the whole community's experience:
+That's it. Whether the underlying OS is QNX-with-a-debug-bridge or a GM Android
+build without Google services doesn't change the next step: **look at what the
+unit reports**, don't guess. Run `tools/adb-recon.sh`.
 
-- **Policy-level sideload block.** GM sets a device-owner policy that disallows
-  installs from unknown sources, so `adb install` / `pm install` are **denied**
-  even with USB debugging on. There is no "Install unknown apps" toggle to flip.
-- **Locked bootloader + verified boot.** No custom flashing, no root, no
-  remounting `/system`.
-- **Community status:** the XDA "GM Google Built-In — Tinkering" thread (25+
-  pages) reports **zero success** sideloading apps this way, and GM's developer
-  portal explicitly answered **"No"** to third-party sideloading.
+## adb connects but is restricted — capture the exact symptom
 
-**Conclusion: there is currently no public method to natively install an app on
-this head unit.** Chasing an adb/`pm install` bypass is a dead end today.
+Common on GM units: adb is present but locked down (unauthorized, no shell, or
+install denied by policy). Pin down which, because it decides everything:
+
+```bash
+adb devices -l                 # "unauthorized" vs "device"
+adb shell id                   # do we get a shell at all?
+adb shell getprop ro.build.fingerprint   # any output = Android-ish; empty = not
+adb install ./any-small.apk    # paste the exact error verbatim
+```
+
+Broad community experience with GM's locked infotainment is **no success**
+natively sideloading (policy block / locked bootloader), so a native install may
+well be a dead end — but we confirm on YOUR unit rather than assume. Meanwhile,
+the projection method below works regardless of what the unit runs.
 
 ➡️ **The working approach is projection, not installation:** run our web app on
 your **phone** and display it on the car screen over **Android Auto**. It's

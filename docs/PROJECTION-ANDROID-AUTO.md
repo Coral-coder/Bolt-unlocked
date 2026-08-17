@@ -1,10 +1,11 @@
 # Getting the app on the screen via Android Auto (the working method)
 
-GM's Android Automotive head unit blocks native app installs
-([NO-TEARDOWN-ACCESS.md](NO-TEARDOWN-ACCESS.md)). So instead of installing on the
-**unit**, we run the app on the **phone** and display it on the car screen over
-**Android Auto**. The head unit just projects it — nothing on the unit changes,
-and it's fully reversible.
+Native install on the head unit is (so far) blocked and unconfirmed
+([NO-TEARDOWN-ACCESS.md](NO-TEARDOWN-ACCESS.md)). The nice thing about this
+method: it **doesn't depend on what the head unit runs.** Your unit has **Android
+Auto** — that's all this needs. We run the app on the **phone** and display it on
+the car screen over Android Auto; the head unit just projects it. Nothing on the
+unit changes, and it's fully reversible.
 
 This gets **Bolt Weather Radar** on the Bolt's screen today, and because the app
 is served from GitHub Pages it still **auto-updates from the repo**.
