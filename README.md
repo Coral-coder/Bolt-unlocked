@@ -104,8 +104,9 @@ we find in B, and register it the way the dead AppShop used to.
 Our first NGI app lives in [`/app`](app): a full-screen **weather radar +
 current conditions** display that uses your GPS location. Radar tiles from
 RainViewer, conditions from the US NWS, dark map from CARTO — all free, no API
-keys. It's a `RemoteHigh` NGI app served from **GitHub Pages**, so pushing to
-this repo **auto-updates** what the unit loads. See
+keys. It's a `RemoteHigh` NGI app served from **GitHub Pages** (branch-based),
+so pushing to the served branch **auto-updates** what the unit loads. Live at
+`https://coral-coder.github.io/Bolt-unlocked/app/` once Pages is on. See
 [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Documents
