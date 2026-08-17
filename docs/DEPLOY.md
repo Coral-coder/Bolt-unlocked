@@ -28,17 +28,23 @@ To cut a new version: edit the app, bump `version` in **both**
 `app/version.json` and `app/gmapp.json` (and `VERSION` in `app/app.js`), commit,
 push. Done.
 
-## One-time GitHub setup
+## One-time GitHub setup (REQUIRED — do this once)
 
-The workflow enables Pages itself (`configure-pages` with `enablement: true`), so
-normally **no manual setting is needed** — just let the Action run.
+The deploy workflow tries to enable Pages itself (`configure-pages` with
+`enablement: true`), **but in this repo the Actions token is not permitted to
+create the Pages site** (`Resource not accessible by integration`). So you must
+enable it by hand, once:
 
-1. If your org disables API-based Pages enablement, flip it by hand once:
-   **Settings → Pages → Build and deployment → Source = GitHub Actions**.
-2. After a successful run, the site URL prints under **Actions → Deploy … →
-   deploy** job → `page_url`, and looks like `https://<owner>.github.io/<repo>/`.
-3. Open that URL in a browser to confirm the app loads. (Geolocation needs
-   HTTPS — Pages is HTTPS, so it works. Locally, use `http://localhost`.)
+1. **Settings → Pages → Build and deployment → Source = GitHub Actions.**
+2. Re-run the failed workflow: **Actions → Deploy Weather Radar app → the failed
+   run → Re-run all jobs** (or just push any change under `app/`).
+3. After it goes green, the site URL prints under the **deploy** job →
+   `page_url`, and looks like `https://<owner>.github.io/<repo>/`.
+4. Open that URL to confirm the app loads. (Geolocation needs HTTPS — Pages is
+   HTTPS, so it works. Locally, use `http://localhost`.)
+
+Until step 1 is done, the **deploy check on the PR will stay red** — that's the
+missing setting, not a bug in the app or workflow.
 
 ## Pointing the head unit at it
 
